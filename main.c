@@ -8,10 +8,10 @@
  * Return: (1) fail or (0) success
 */
 
-bus_t bus = {NULL, NULL, NULL};
 
 int main(int argc, char **argv)
 {
+	bus_t bus = {NULL, NULL, NULL};
 	char *content = NULL;
 	unsigned int no = 1;
 	size_t size = 0;

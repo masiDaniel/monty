@@ -37,7 +37,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 		(*lineptr)[input++] = (char)no_chars;
 		if (no_chars == '\n')
 			break;
-	} while((no_chars = fgetc(stream)) != EOF);
+	} while ((no_chars = fgetc(stream)) != EOF);
 
 	(*lineptr)[input] = '\0';
 	if (no_chars == EOF && input == 0)
