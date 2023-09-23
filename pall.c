@@ -15,5 +15,6 @@ void _pall(stack_t **head, unsigned int count)
 	pointer = *head;
 	do {
 	printf("%d\n", pointer->n);
+	pointer = pointer->next;
 	} while (pointer);
 }

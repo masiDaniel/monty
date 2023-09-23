@@ -1,23 +1,23 @@
-#include <stdio.h>
 #include "monty.h"
+#include <stdio.h>
 
 /**
- * main - deriver code
- * @argc: arg no
- * @argv: arg vector
- * Return: (1) fail or (0) success
-*/
+ * main - main function
+ * @argc: argument count
+ * @argv: argument vector
+ * Return: 0 on success, 1 otherwise
+ */
 
+bus_t bus = {NULL, NULL, NULL};
 
 int main(int argc, char **argv)
 {
-	bus_t bus = {NULL, NULL, NULL};
+	FILE *file;
 	char *content = NULL;
-	unsigned int no = 1;
+	stack_t *stack = NULL;
+	unsigned int count = 1;
 	size_t size = 0;
 	ssize_t read = 1;
-	stack_t *stack = NULL;
-	FILE *file;
 
 	if (argc != 2)
 	{
@@ -45,10 +45,11 @@ int main(int argc, char **argv)
 			free(content);
 			break;
 		}
-		execute(&stack, no, file, content);
-		no++;
+		execute(&stack, count, file, content);
+		count++;
 	}
 	free_stack(stack);
 	fclose(file);
 	return (0);
+
 }

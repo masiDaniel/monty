@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "monty.h"
+#include <stdbool.h>
 
 /**
  * _getline - reads a whole line from the standard input
@@ -12,14 +13,14 @@
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
 	char *test;
-	int no_chars;
+	int current_char;
 	size_t input = 0;
 
 	if (stream == NULL || lineptr == NULL || n == NULL)
 		return (-1);
 	if (*lineptr == NULL)
 	{
-		*n = 130;
+		*n = 128;
 		*lineptr = (char *)malloc(*n);
 		if (*lineptr == NULL)
 			return (-1);
@@ -34,13 +35,14 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 				return (-1);
 			*lineptr = test;
 		}
-		(*lineptr)[input++] = (char)no_chars;
-		if (no_chars == '\n')
+		current_char = fgetc(stream);
+		if (current_char == EOF || current_char == '\n')
 			break;
-	} while ((no_chars = fgetc(stream)) != EOF);
+		(*lineptr)[input++] = (char)current_char;
+	} while (1);
 
 	(*lineptr)[input] = '\0';
-	if (no_chars == EOF && input == 0)
+	if (current_char == EOF && input == 0)
 	{
 		free(*lineptr);
 		*lineptr = NULL;

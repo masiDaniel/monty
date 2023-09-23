@@ -42,7 +42,7 @@ typedef struct instruction_s
  * @file: the file
  * @content: line content
  * @arg: the argument
- *
+ * 
  * Description: stores the argument, file
  * and file content from the opcodes file
  */

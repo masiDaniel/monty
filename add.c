@@ -19,20 +19,19 @@ void _add(stack_t **head, unsigned int count)
 		pointer = pointer->next;
 		length++;
 	} while (pointer);
-
-	if (length > 2)
+	if (length < 2)
 	{
-		pointer = *head;
-		sum = (pointer->next->n) + (pointer->n);
-		pointer->next->n = sum;
-		*head = pointer->next;
-		(*head)->prev = NULL;
-		free(pointer);
+		fprintf(stderr, "L%d: can't add, stack too short\n", count);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	pointer = *head;
+	sum = (pointer->n) + (pointer->next->n);
+	pointer->next->n = sum;
+	*head = pointer->next;
+	(*head)->prev = NULL;
+	free(pointer);
 	}
 
-	fprintf(stderr, "L%d: can't add, stack too short\n", count);
-	fclose(bus.file);
-	free(bus.content);
-	free_stack(*head);
-	exit(EXIT_FAILURE);
-}

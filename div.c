@@ -17,14 +17,15 @@ void _div(stack_t **head, unsigned int count)
 
 	do {
 		pointer = pointer->next;
+		length++;
 	} while (pointer);
 
 	if (length < 2)
 	{
 		fprintf(stderr, "L%d: can't div, stack too short\n", count);
+		fclose(bus.file);
 		free(bus.content);
 		free_stack(*head);
-		fclose(bus.file);
 		exit(EXIT_FAILURE);
 	}
 
@@ -32,14 +33,15 @@ void _div(stack_t **head, unsigned int count)
 	if (pointer->n == 0)
 	{
 		fprintf(stderr, "L%d: division by zero\n", count);
+		fclose(bus.file);
 		free(bus.content);
 		free_stack(*head);
-		fclose(bus.file);
 		exit(EXIT_FAILURE);
 	}
 	result = (pointer->next->n) / (pointer->n);
 	pointer->next->n = result;
 	*head = pointer->next;
-	(*head)->prev = NULL;
+	if (*head)
+		(*head)->prev = NULL;
 	free(pointer);
 }

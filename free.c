@@ -10,6 +10,8 @@ void free_stack(stack_t *stack)
 {
 	stack_t *temporary;
 
+	if (stack == NULL)
+		return;
 	do {
 		temporary = stack;
 		stack = stack->next;

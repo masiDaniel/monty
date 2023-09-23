@@ -42,6 +42,8 @@ void _mod(stack_t **head, unsigned int count)
 	modular = (pointer->next->n) % (pointer->n);
 	pointer->next->n = modular;
 	*head = pointer->next;
-	(*head)->prev = NULL;
+	if (*head)
+		(*head)->prev = NULL;
+
 	free(pointer);
 }

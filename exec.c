@@ -27,24 +27,23 @@ int execute(stack_t **stack, unsigned int count, FILE *file, char *content)
 		{"mod", _mod},
 		{NULL, NULL}
 	};
-
 	opcode = strtok(content, " \n\t");
 	if (!opcode)
 		return (0);
 
 	bus.arg = strtok(NULL, " \n\t");
 
-	do {
+	for (x = 0; instructions[x].opcode; x++)
+	{
 		if (strcmp(opcode, instructions[x].opcode) == 0)
 		{
 			instructions[x].f(stack, count);
 			return (0);
 		}
-		x++;
-	} while (instructions[x].opcode);
+	}
+	fclose(file);
 	free(content);
 	free_stack(*stack);
-	fclose(file);
-	 fprintf(stderr, "L%d: unknown instruction %s\n", count, opcode);
+	fprintf(stderr, "L%d: unknown instruction %s\n", count, opcode);
 	exit(EXIT_FAILURE);
 }
